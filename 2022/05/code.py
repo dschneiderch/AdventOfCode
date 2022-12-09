@@ -1,5 +1,5 @@
 #%%
-inputfile = open("20221205/input.txt", "r")
+inputfile = open("2022/05/input.txt", "r")
 input = inputfile.read().splitlines()
 # %%
 for i,j in enumerate(input):

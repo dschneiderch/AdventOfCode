@@ -1,5 +1,5 @@
 #%%
-inputfile = open("20221207/input.txt", "r")
+inputfile = open("2022/07/input.txt", "r")
 input = inputfile.read().splitlines()
 input
 # %%

@@ -1,5 +1,5 @@
 #%%
-inputfile = open('input.txt','r')
+inputfile = open('2022/03/input.txt','r')
 inputstring = inputfile.read()
 input=inputstring.splitlines()
 input
@@ -12,7 +12,7 @@ def split_string(s):
     s1=s[0:(len(s)//2)]
     s2=s[(len(s)//2):]
     return [s1,s2]
-        
+
 # %%
 compartments = list(map(split_string,input))
 # %%
@@ -42,7 +42,7 @@ def myintersection(x):
     if num_parts > 2:
         for i in range(2,num_parts):
             common=common.intersection(x[i])
-    return common    
+    return common
 
 i3 = list(map(myintersection, out))
 intersect3 = list(map(lambda x: set(x[0]).intersection(x[1]).intersection(x[2]), out))

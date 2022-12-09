@@ -1,5 +1,5 @@
 #%%
-inputfile = open("20221206/input.txt", "r")
+inputfile = open("2022/06/input.txt", "r")
 input = inputfile.read()
 # input = 'zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw'
 # %% Answer Part 1

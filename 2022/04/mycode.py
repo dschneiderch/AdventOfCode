@@ -1,5 +1,5 @@
 #%%
-datafile = open('20221204/input.txt','r')
+datafile = open('2022/04/input.txt','r')
 input = datafile.read().splitlines()
 
 import re
@@ -36,7 +36,7 @@ def func(x):
         return 1
     else:
         return 0
-        
+
 
 # %% answer 2
 sum(list(map(func, input2)))

@@ -1,5 +1,5 @@
 
-lines = open("20221201/input.txt", 'r')
+lines = open("2022/01/input.txt", 'r')
 input = lines.readlines()
 input
 input_lists = ''.join(input).split("\n\n")

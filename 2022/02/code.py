@@ -1,6 +1,5 @@
-import numpy as np
 
-fin = open("20221202/input.txt", "r")
+fin = open("2022/02/input.txt", "r")
 raw_input = fin.readlines()
 input = [i.strip("\n") for i in raw_input]
 
