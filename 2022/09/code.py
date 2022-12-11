@@ -24,17 +24,20 @@ def move_tail(head_pos:list, tail_pos:list[list])->list:
     y_diff = head_pos[1] - last_tail_pos[1]
     # print("x diff",x_diff)
     # print("y diff",y_diff)
-    # move diagonal
     if abs(x_diff) > 1 or abs(y_diff) > 1:
-        return tail_pos + [head_pos.copy()]
-    # move lateral
-    elif abs(x_diff) > 1:
-        new_tail_pos = [last_tail_pos[0] + x_diff // 2, last_tail_pos[1]]
-        return tail_pos + [new_tail_pos]
-    # move longitudinal
-    elif abs(y_diff) > 1:
-        new_tail_pos = [last_tail_pos[0], last_tail_pos[1] + y_diff // 2]
-        return tail_pos + [new_tail_pos]
+        # move diagonal
+        if abs(x_diff) > 1 and abs(y_diff == 1):
+            return tail_pos + [[last_tail_pos[0] + x_diff // 2, last_tail_pos[1]+1]]
+        elif abs(y_diff) > 1 and abs(x_diff == 1):
+            return tail_pos + [[last_tail_pos[0]+1, last_tail_pos[1] + y_diff // 2]]
+        # move lateral
+        elif abs(x_diff) > 1:
+            new_tail_pos = [last_tail_pos[0] + x_diff // 2, last_tail_pos[1]]
+            return tail_pos + [new_tail_pos]
+        # move longitudinal
+        elif abs(y_diff) > 1:
+            new_tail_pos = [last_tail_pos[0], last_tail_pos[1] + y_diff // 2]
+            return tail_pos + [new_tail_pos]
     else:
         return tail_pos
 
@@ -48,7 +51,9 @@ for d, s in data:
     i = 1
     while i <= s:
         head_pos = move_head(head_pos, d, 1)
+        print(head_pos, tail_pos)
         tail_pos = move_tail(head_pos, tail_pos)
+        print("tail: ", tail_pos)
         # print("moved head:", head_pos, tail_pos[-1])
         # print("follow tail:", head_pos, tail_pos[-1])
         i += 1
