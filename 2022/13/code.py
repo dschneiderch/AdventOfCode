@@ -72,11 +72,9 @@ class Packet:
         print(self.right)
         left = self.left
         right = self.right
-        print(list(itertools.zip_longest(left, right)))
-        for i, j in itertools.zip_longest(left, right):
+        # print(list(itertools.zip_longest(left, right)))
+        while True:
             print(left, right)
-            if j is None:
-                return False
 
             left, right = self.get_integer_integer(left, right)
             in_order = self.compare_values(left, right)
