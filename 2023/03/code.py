@@ -31,6 +31,14 @@ def get_special_position(string) -> Sequence[int]:
     return pos
 
 
+def get_gear_indicator_position(string) -> Sequence[int]:
+    pos = []
+    for i, c in enumerate(string):
+        if c == "*":
+            pos.append(i)
+    return pos
+
+
 def is_part(num: Sequence[int], special_characters: Sequence[Sequence[int]]) -> bool:
     start = num[0]
     end = num[1] - 1
@@ -48,22 +56,63 @@ def is_part(num: Sequence[int], special_characters: Sequence[Sequence[int]]) -> 
     return any(is_adjacent)
 
 
-# %% part 1
+def get_gear_ratio(
+    gear_pos: int, schematic_digits: Sequence[Sequence[Sequence]]
+) -> int:
+    # print("gear pos", gear_pos)
+    # print("schematic digits", schematic_digits)
+    is_adjacent = []
+    # print("end ", end)
+    # print(special_characters)
+    for sd in schematic_digits:
+        for d in sd:
+            num, (start, end) = d
+            end = end - 1
+            print(start, end, gear_pos)
+            part_condition = gear_pos >= start - 1 and gear_pos <= end + 1
+            if part_condition:
+                print(num)
+                is_adjacent.append(num)
+    print(is_adjacent)
+    if len(is_adjacent) == 2:
+        product = 1
+        for a in is_adjacent:
+            product *= a
+        return product
+    else:
+        return 0
+
+
+# %% part 1 & part 2
+input = """467..114..
+...*......
+..35..633.
+......#...
+617*......
+.....+.58.
+..592.....
+......755.
+...$.*....
+.664.598.."""
+
 schematic = [""]
 special_pos = []
+gear_digits = []
 part_sum = 0
-# input_file = open("03/input.txt", "r")
-# input = input_file.read()
+gear_ratio_sum = 0
+input_file = open("03/input.txt", "r")
+input = input_file.read()
+input = input + """\n """
 for i, line in enumerate(input.split("\n")):
     print("i ---------------------------- ", i)
     if i == 0:
         schematic.append(line)
-        # print("schematic ", schematic)
         continue
     elif i == 1:
         schematic.append(line)
     else:
         special_pos = []
+        gear_digits = []
         schematic[0] = schematic[1]
         schematic[1] = schematic[2]
         schematic[2] = line
@@ -73,25 +122,22 @@ for i, line in enumerate(input.split("\n")):
     #     print(f"{s}\n")
 
     for s in schematic:
-        special_pos.append(get_special_position(s))
+        special_pos.append(get_special_position(s))  # for part 1
+        gear_digits.append(get_digit_position(s))  # for part 2
 
-    digits = get_digit_position(schematic[1])
+    digits = get_digit_position(schematic[1])  # for part 1
+    gear_pos = get_gear_indicator_position(schematic[1])  # for part 2
 
+    # part 1
     for num, pos in digits:
-        # print("checking num:", num)
-        # print("...is_part", is_part(pos, special_pos))
         if is_part(pos, special_pos):
             part_sum += num
+    # part 2
+    for pos in gear_pos:
+        gear_ratio = get_gear_ratio(pos, gear_digits)
+        gear_ratio_sum += gear_ratio
 
-print("i ---------------------------- last row")
-last_special_pos = get_special_position(schematic[1])
-last_digits = get_digit_position(schematic[2])
-for num, pos in last_digits:
-    print("checking num:", num)
-    if is_part(pos, [last_special_pos]):
-        print(num)
-        part_sum += num
 
-print(part_sum)
-
+print("part sum: ", part_sum)
+print("gear ratio sum: ", gear_ratio_sum)
 # %%
